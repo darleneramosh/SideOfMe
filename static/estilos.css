@@ -1,0 +1,868 @@
+
+
+/* ESTADO INICIAL: Cuando estás arriba del todo */
+.main-header {
+    background-color: rgba(255, 255, 255, 0); /* Transparente */
+    box-shadow: none;
+    transition: all 0.2s ease; /* Transición suave */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9999;
+}
+
+/* ESTADO AL BAJAR: Cuando JavaScript añade la clase .scrolled */
+.main-header.scrolled {
+    background-color: #ffffff; /* Se vuelve blanco sólido */
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1); /* Aparece la sombra */
+    padding: 5px 0; /* Opcional: el header se hace un poquito más delgado al bajar */
+}
+
+/* Opcional: Cambiar el color de los links al bajar si eran blancos */
+.main-header.scrolled .nav-links a {
+    color: #333;
+}
+
+.main-header.scrolled .nav-links a:hover{
+	color: #d12435;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+}
+
+.header-container {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #ffffff;
+}
+
+/* --- Logo (Ajuste fino) --- */
+.logo-img-Albiram-Horizontal {
+    height: 60px; /* Ajustamos a 60px para que Albiram se vea claro */
+    width: auto;  /* El ancho se calcula solo para no deformar */
+    display: block;
+}
+
+/* --- Navegación --- */
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+	font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+
+.nav-links a:hover, h2{
+    color: #d12435;
+	font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+	font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 1.0px;
+    text-underline-offset: 3px;
+}
+
+/* --- Botón CTA Nav --- */
+.nav-cta {
+    background-color: #d12435;
+    color: #ffffff !important;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+/****** Botones ******/
+.btn-inicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    padding: 30px 20px;
+    gap: 25px;
+}
+
+/* Botones */
+.btn-inicio a{
+    text-decoration: none;
+    color: #ffffff;
+
+    font-size: clamp(14px, 2vw, 20px);
+	font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    background-color: #d12435;
+
+    padding: 15px 25px;
+    border-radius: 15px;
+
+    transition: all 0.3s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 180px;
+    text-align: center;
+}
+
+/* Hover */
+.btn-inicio a:hover {
+    color: #ffffff;
+
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+
+    transform: translateY(-3px);
+}
+
+/* Tablets */
+@media (max-width: 768px){
+
+    .btn-inicio{
+        gap: 15px;
+    }
+
+    .btn-inicio a{
+        width: 80%;
+        font-size: 16px;
+        padding: 14px 20px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 480px){
+
+    .btn-inicio{
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-inicio a{
+        width: 100%;
+        max-width: 320px;
+
+        font-size: 15px;
+        padding: 13px 18px;
+
+        border-radius: 12px;
+    }
+}
+
+/* --- Responsive Móvil --- */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        align-items: center; /* centra todo */
+        text-align: center;
+        width: 280px; /* antes 200px */
+        max-width: 85vw;
+
+        background-color: white;
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 25px 20px;
+        gap: 18px;
+
+        border-radius: 18px 0 0 18px;
+
+        box-shadow: -5px 5px 20px rgba(0,0,0,0.12);
+
+        transition: right 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .menu-toggle span {
+        width: 30px;
+        height: 3px;
+        background-color: #333; /* Color de las líneas */
+        transition: 0.3s;
+    }
+
+    .logo-img-Albiram-Horizontal {
+        height: 45px; /* Más pequeño en móvil */
+    }
+}
+
+
+/*****************************************************************************/
+
+.som-carousel{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    border-radius: 20px;
+}
+
+/* Contenedor */
+.carousel-track{
+    position: relative;
+    width: 100%;
+    height: clamp(250px, 60vw, 810px);
+}
+
+/* Imágenes */
+.carousel-img{
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    object-fit: cover;
+
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+/* Imagen activa */
+.carousel-img.active{
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Responsive */
+
+/* Tablet */
+@media (max-width: 768px){
+
+    .carousel-track{
+        height: 450px;
+    }
+}
+
+/* Celular */
+@media (max-width: 480px){
+
+    .carousel-track{
+        height: 300px;
+    }
+
+    .som-carousel{
+        border-radius: 12px;
+    }
+}
+
+/* Botones */
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: rgba(255,255,255,0.7);
+    border: none;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    font-size: 22px;
+    z-index: 5;
+
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: rgb(231, 37, 37);
+    color: white;
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+/*****************************************************************************/
+
+h2{
+	font-family: 'Oswald', sans-serif;
+	font-size: 30px;
+	text-align: center;
+    letter-spacing: 2px;
+}
+
+
+/* Contenedor de la sección */
+#tipoPrenda {
+    padding: 50px 20px;
+    background-color: #ffffff;
+}
+
+/* Rejilla de 2 columnas */
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Tarjeta de ítem */
+.models-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5; /* Formato vertical tipo catálogo */
+    background-color: #f0f0f0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+/* Estilo del Video */
+.menu-item-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 
+        transform 0.6s ease,
+        opacity 0.5s ease;
+}
+
+/* Oscurecer video al hover */
+.models-item:hover .menu-item-video {
+    transform: scale(1.10);
+    opacity: 0.65;
+    filter: brightness(0.6) saturate(1.4);
+}
+
+/* Contenido encima */
+.menu-item-content {
+    position: absolute;
+    left: 50%;
+    bottom: -80px; /* inicia oculto */
+    transform: translateX(-50%);
+    
+    width: 100%;
+    text-align: center;
+    
+    opacity: 0;
+    transition: all 0.5s ease;
+    
+    z-index: 2;
+    color: #000000;
+}
+
+/* Mostrar contenido al hover */
+.models-item:hover .menu-item-content {
+    bottom: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 1;
+}
+
+/* Título */
+.menu-item-content h3 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: rgb(0, 0, 0);
+    font-family: 'Oswald', sans-serif;
+    font-weight: bolder;
+}
+.menu-item-content p{
+    font-family: 'Oswald', sans-serif;
+}
+
+.menu-item-content p:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    font-family: 'Oswald', sans-serif;
+    
+}
+
+/* Botón */
+.models-btn {
+    background: #d12435;
+    color: #ffffff;
+    border: none;
+    padding: 10px 25px;
+    margin: 10px 4px;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background 0.3s;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.models-btn:hover {
+    background: rgb(255, 255, 255);
+    color: white;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    .contenedor-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor del botón */
+.atc-wsp-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+    z-index: 10; /* Asegura que esté por encima de las decoraciones */
+}
+
+/* Estilo del Botón CTA */
+.cta-btn {
+    background-color: #000; /* Negro elegante */
+    color: #fff;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px; /* Estilo píldora, muy moderno */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+/* Efecto Hover */
+.cta-btn:hover {
+    background-color: #333;
+    transform: translateY(-3px); /* Pequeño salto al pasar el mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto Click */
+.cta-btn:active {
+    transform: translateY(0);
+}
+
+
+
+
+.logo-albiram-h {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff; /* Cambia darkblue por blanco */
+    padding: 10px 0; /* Un poco de espacio arriba y abajo */
+    margin: 0;
+}
+
+
+
+
+/******** CONTENEDOR GENERAL ********/
+.contenedor-cards {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+    padding: 15px;
+
+    box-sizing: border-box;
+}
+
+/******** CARD ********/
+.models-card {
+    background: #fff;
+
+    width: 100%;
+    max-width: 100%;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    transition: transform 0.3s ease;
+}
+
+/******** HOVER ********/
+.models-card:hover {
+    transform: translateY(-5px);
+}
+
+/******** TITULOS ********/
+.models-card h3 {
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+    color: #333;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.models-card h2 {
+    font-size: 13px;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-weight: 250;
+    letter-spacing: 1px;
+}
+
+/******** IMAGEN ********/
+.models-card img {
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    display: block;
+}
+
+/******** SLIDER ********/
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+/******** BOTONES ********/
+.botones-card {
+    margin: 18px 4px;
+    text-align: center;
+}
+
+/* OJO: acá faltaba el punto */
+.botones-card .models-btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    margin: 10px 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 12px;
+    transition: background 0.3s;
+}
+
+/******** RESPONSIVE ********/
+
+/* Laptop pequeña */
+@media (max-width: 1024px) {
+    .contenedor-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .contenedor-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .models-card {
+        padding: 10px;
+    }
+
+    .models-card h3 {
+        font-size: 22px;
+    }
+}
+
+/* Celular */
+@media (max-width: 480px) {
+    .contenedor-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .models-card {
+        padding: 8px;
+    }
+
+    .models-card h3 {
+        font-size: 20px;
+    }
+
+    .models-card h2 {
+        font-size: 12px;
+    }
+}
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    overflow-x: hidden; /* Evita que aparezca la barra de scroll horizontal */
+    scroll-behavior: smooth;
+}
+
+/*********FOOTER********/
+footer {
+    background-color: #d12435;
+    padding: 40px 20px 10px 20px;
+    color: #ffffff;
+    font-family: 'Grand Hotel', cursive;
+    font-size: 25px;
+    text-align: center;
+}
+
+/* El contenedor principal */
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo centrado */
+footer img.d-block {
+    margin-bottom: 30px;
+    filter: brightness(0) invert(1); /* Esto asegura que el logo se vea blanco si es oscuro */
+}
+
+/* Contenedor de Redes Sociales */
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Espacio entre círculos */
+    margin-bottom: 40px;
+}
+
+/* Quitamos los puntos de las listas que ya tienes */
+.icons ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.icons li {
+    display: inline-block;
+}
+
+/* 4. Tamaño de tus imágenes de icono */
+.icons img {
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.icons img:hover {
+    transform: scale(1.1); /* Efecto de agrandar al pasar el mouse */
+}
+
+/* Estilo para los círculos de las redes sociales */
+.icons > div {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.icons > div:hover {
+    transform: translateY(-10px);
+}
+
+/* Color de los iconos (si usas FontAwesome dentro de los <a>) */
+.icons a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+}
+
+.icons > div:hover a {
+    color: #d12435; /* El icono se pone rojo cuando el fondo es blanco */
+}
+
+/* --- Créditos y parte inferior --- */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+.footer-credits p {
+    margin: 5px 0;
+}
+
+.footer-credits strong {
+    color: #ffffff;
+}
+
+.footer-credits .small {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.fw-semibold {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SLIDER */
+.image-container {
+    position: relative;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.left { left: 10px; }
+.right { right: 10px; }
+
+.nav-arrow.left:hover,
+.nav-arrow.right:hover {
+    color: #d12435;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 60%;
+}
+
+
+
+
+/* COLORES */
+.colors {
+    margin-top: 5px;
+	text-align: center;
+}
+
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+    
+}
+
+.color-dot.negro { background: black; outline: 1px solid #ccc}
+.color-dot.beige { background: beige; outline: 1px solid #ccc}
+.color-dot.chocolate { background: chocolate; outline: 1px solid #ccc}
+.color-dot.vino { background: #8a0425; outline: 1px solid #ccc}
+.color-dot.sky { background: #025ed6; outline: 1px solid #ccc}
+.color-dot.celeste { background: #62add2; outline: 1px solid #ccc}
+.color-dot.palorosa { background: #D6706C; outline: 1px solid #ccc}
+.color-dot.melon { background: #F9937E; outline: 1px solid #ccc}
+.color-dot.blanco { background: #ffffff; border: 1px solid #8f8b8b}
+.color-dot.camello { background: #c56702; outline: 1px solid #ccc}
+.color-dot.cemento { background: #a9c7b3; outline: 1px solid #ccc}
+.color-dot.azulacero { background: #26185f; outline: 1px solid #ccc}
+.color-dot.verdeagua { background: #BDE3CA; outline: 1px solid #ccc}
+.color-dot.beigeoscuro { background: #D9BF71; outline: 1px solid #ccc}
+.color-dot.coral { background: #fa4854; outline: 1px solid #ccc}
+.color-dot.red { background: #e21a1a; outline: 1px solid #ccc}
+.color-dot.chicle { background: #E2A9E5; outline: 1px solid #ccc}
+.color-dot.cocoa { background: #9E8679; outline: 1px solid #ccc}
+.color-dot.verdeclaro { background: #afc99c; outline: 1px solid #ccc}
+.color-dot.verdeperico { background: #27B075; outline: 1px solid #ccc}
+.color-dot.verdemilitar { background: #485D2D; outline: 1px solid #ccc}
+.color-dot.amarillo { background: rgb(239, 239, 116); outline: 1px solid #ccc}
+.color-dot.rosadobebe { background: #F3C7D2; outline: 1px solid #ccc}
+
+
+.color-dot.active {
+    outline: 1px solid #ccc;
+    outline-offset: 3px;
+}
